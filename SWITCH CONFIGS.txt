@@ -1,0 +1,80 @@
+Switch>en
+Switch#config t
+Switch#config terminal 
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#
+Switch(config)#
+Switch(config)#host
+Switch(config)#hostname FINANCE - SW
+                                ^
+% Invalid input detected at '^' marker.
+	
+Switch(config)#hostname FINANCE-SW
+enable password cisco
+FINANCE-SW(config)#line con 0
+password cisco
+login
+exit
+banner motd $UNAUTHORISED ACCESS NOT ALLOWED!!$
+service password-encryption 
+no ip domain-lookup 
+
+
+
+
+
+
+en
+conf t
+hostname SVR-SW
+enable password cisco
+line console 0
+password cisco
+login
+exit
+banner motd #NO UNAUTHORISED ACCESS ALLOWED#
+service password-encryption
+no ip domain lookup
+
+do wr
+
+
+
+
+
+---setting up vlan---
+
+vlan 40
+name DATA
+vlan 100
+name VOICE
+
+int fa0/1
+switchport mode trunk
+exit
+
+
+int range fa0/2-24
+switchport mode access
+switchport access vlan 40
+switchport voice vlan 100
+
+do wr
+
+
+--for server dept
+vlan 50
+name DATA
+
+
+int fa0/1
+switchport mode trunk
+exit
+
+
+int range fa0/2-5
+switchport mode access
+switchport access vlan 50
+
+
+do wr
